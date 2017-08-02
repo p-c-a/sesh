@@ -4,3 +4,9 @@
 
 # Object files
 *.o
+
+# Binary
+sesh
+
+# History file
+.sesh_history
