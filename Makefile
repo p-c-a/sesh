@@ -1,17 +1,22 @@
 CC = gcc
 CFLAGS = -g -ggdb -Wall -Werror
+COMPILE = $(CC) $(CFLAGS)
 OBJECTS = linenoise.o list.o token.o cmd.o lexer.o parser.o execute.o sesh.o
 
-.PHONY: all clean
+.PHONY: all clean tags
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $<
+	$(COMPILE) -c $<
 
 all: sesh
 
 clean:
 	rm -f *~ \#*\#
 	rm -f sesh *.o
+	rm -f TAGS
 
 sesh: $(OBJECTS) sesh.c
-	$(CC) -o sesh $(OBJECTS)
+	$(COMPILE) -o sesh $(OBJECTS)
+
+tags:
+	find . -name "*.[ch]" -print | etags -
